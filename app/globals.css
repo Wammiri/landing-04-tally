@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Tally design tokens. Palette is fixed by SPEC.md section 2. */
+@theme inline {
+  --color-bg: #f1f4f8;
+  --color-grid: #dce3ec;
+  --color-ink: #14171c;
+  --color-ink-hover: #22262d;
+  --color-muted: #66707e;
+  --color-gain: #0e9f6e;
+  --color-loss: #d7382e;
+  --color-card: #ffffff;
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+}
+
+/* The graph paper ground. Sits behind everything, never over text. */
+body {
+  background-color: #f1f4f8;
+  background-image:
+    linear-gradient(#dce3ec 1px, transparent 1px),
+    linear-gradient(90deg, #dce3ec 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: #14171c;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* No dark mode on this project, by spec. Lock the light scheme so the
+   browser does not restyle form controls or scrollbars. */
+:root {
+  color-scheme: light;
+}
+
+/* D-08: optical size set high for display use. Fraunces opsz runs 9 to 144;
+   the high end is what gives the headline its display cut. */
+.font-display {
+  font-variation-settings: "opsz" 120;
+}
+
+/* Focus ring in ink, per spec section 7. */
+:focus-visible {
+  outline: 2px solid #14171c;
+  outline-offset: 2px;
+}

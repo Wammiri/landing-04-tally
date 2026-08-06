@@ -36,7 +36,9 @@ Every significant decision, including the ones where nothing gets built. Status 
 
 **Traded off:** Roughly 30 to 50 KB gzipped on the page with the highest performance target in the suite (97+). Mitigated by only two client components: the word ticker and the form.
 
-**Pin the version** at install time and record it here once known.
+**Pinned version:** `framer-motion@13.0.0`, installed with `--save-exact` on 2026-08-07. Next 16.3.0, React 19.2.8, Tailwind v4.
+
+**Note on Tailwind v4:** the scaffold ships the CSS first config, so there is no `tailwind.config.ts`. Tokens live in an `@theme` block in `app/globals.css` instead. The `BATCH_PLAN.md` B1 file list names `tailwind.config.ts`; that file is not created because the toolchain no longer uses one.
 
 **Status:** settled
 
@@ -94,7 +96,9 @@ Every significant decision, including the ones where nothing gets built. Status 
 
 **Confidence:** medium on availability, high on the approach. **Cost if wrong:** low, purely a typographic refinement.
 
-**Status:** inferred, medium confidence, flagged for Isaac
+**Resolved 2026-08-07 during B1.** The axis is available, but `next/font` rejects `axes` alongside an explicit `weight` list: "Axes can only be defined for variable fonts when the weight property is nonexistent or set to `variable`." Fraunces is loaded as a variable font with `axes: ["opsz"]` and no weight array, which keeps the optical size axis and still covers the specced weights 500 and 600 through the variable weight range. `opsz` is set to 120 on `.font-display` in `app/globals.css`. This is the better of the two branches, not the fallback.
+
+**Status:** resolved, implemented
 
 ---
 
