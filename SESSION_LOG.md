@@ -99,9 +99,9 @@ Isaac deployed to Vercel and supplied the GA4 Measurement ID `G-0QXCCQYR17`, cle
 - Screenshots of the live URL at 1440px and 390px match the local build exactly.
 - **B2-01, GA4 confirmed firing on the live URL.** `window.gtag` loads, requests carry tag `G-0QXCCQYR17`, and `page_view` was observed reaching Google's `/g/collect` endpoint. `cta_click` and `waitlist_signup` were both observed in `window.dataLayer` and dispatched through `gtag` after a real form submission on the live page. GA4 batches conversion events slightly after dispatch, so the collect hits captured in the window were `page_view`, `scroll`, and `form_start`; the dispatch of both conversion events is confirmed, which is the part the code is responsible for.
 
-**Blocked, and not guessed:**
+**B2-02, closed as skipped rather than blocked:**
 
-- **B2-02 is incomplete. The PageSpeed mobile score is not recorded.** The public PageSpeed Insights API returned HTTP 429 (rate limited, no API key) on five consecutive attempts with 60 second backoff. `BATCH_PLAN.md` B2-02 says explicitly: do not guess it, measure it. No number has therefore been written to the pack. This is an external dependency blocker, not a code issue. Isaac runs the URL through <https://pagespeed.web.dev/> and supplies the mobile figure, or provides a PageSpeed API key.
+- **The PageSpeed mobile score is not measured and no number is recorded.** The public PageSpeed Insights API returned HTTP 429 (rate limited, no API key) on five consecutive attempts with 60 second backoff. `BATCH_PLAN.md` B2-02 says explicitly: do not guess it, measure it. Isaac then waived the measurement on 2026-08-07. Recorded as decision D-19 with the trigger that would change it. The spec's expectation of 97+ mobile is therefore unverified, and nothing in the pack claims it was met.
 
 **Flags for Isaac:**
 
@@ -112,12 +112,12 @@ Isaac deployed to Vercel and supplied the GA4 Measurement ID `G-0QXCCQYR17`, cle
 **Handoff for project `05-isaac-site` (B2-03):**
 
 - `[TODO_URL_4]` = `https://landing-04-tally.vercel.app/`
-- `[TODO_SCORE_4]` = pending, see B2-02 above.
+- `[TODO_SCORE_4]` = not supplied. Isaac waived the PageSpeed measurement (D-19). Leave `[TODO_SCORE_4]` unfilled or note it as not measured in project 05, rather than inventing a figure.
 
 **House style:** the em dash scan returns zero results.
 
-**Parked:** B2-02 and therefore the score half of B2-03, pending the PageSpeed measurement.
+**Parked:** nothing. B2 is closed.
 
-**Next:** nothing further in this project once the score lands. The page is complete, verified in production, and matches the spec.
+**Next:** none. This project is complete: built to spec, deployed, GA4 verified live, and the one waived item (PageSpeed score) is recorded as a decision with its trigger, not left dangling.
 
 ---

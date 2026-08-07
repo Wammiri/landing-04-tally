@@ -79,9 +79,11 @@ Record the rung and the results in `SESSION_LOG.md`.
 
 ## B2. Post deploy handoff
 
-**Status:** B2-01 done 2026-08-07. B2-02 blocked: pending the PageSpeed mobile score. B2-03 partially done (URL handed off, score pending).
+**Status:** done, 2026-08-07. B2-01 done. B2-02 closed with the score deliberately skipped (D-19). B2-03 done, URL handed off.
 
-Production URL: <https://landing-04-tally.vercel.app/>. GA4 `G-0QXCCQYR17` is live and its events are confirmed firing. The PageSpeed Insights public API returned HTTP 429 on five attempts, so the score was deliberately left unmeasured rather than guessed, per this batch's own instruction. See `SESSION_LOG.md` session 2.
+Production URL: <https://landing-04-tally.vercel.app/>. GA4 `G-0QXCCQYR17` is live and its events are confirmed firing. The PageSpeed mobile score was waived by Isaac after the public API rate limited this machine; no number was guessed. See `SESSION_LOG.md` session 2 and D-19.
+
+**This is the final batch. The project is complete.**
 
 **Depends on:** B1 done, then Isaac deploys.
 

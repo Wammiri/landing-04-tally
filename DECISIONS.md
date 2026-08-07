@@ -212,4 +212,20 @@ Every significant decision, including the ones where nothing gets built. Status 
 
 **Why:** Vercel CLI on this machine is not logged in. Deployment is also outward facing.
 
-**Status:** settled, blocked pending Isaac
+**Resolved 2026-08-07.** Isaac deployed. Production URL is <https://landing-04-tally.vercel.app/>.
+
+**Status:** resolved
+
+---
+
+## D-19. The PageSpeed mobile score is not measured
+
+**Chosen:** Skip the Lighthouse measurement. No score is recorded for this project, and `[TODO_SCORE_4]` in project `05-isaac-site` is left without a figure from here.
+
+**Why:** Isaac's call on 2026-08-07. The PageSpeed public API rate limited this machine (HTTP 429 on five attempts with backoff) and the score is a nice to have on a concept build, not a spec requirement for the page itself. `BATCH_PLAN.md` B2-02 says measure it rather than guess it, so with measurement unavailable and the requirement waived, the honest outcome is no number rather than an estimate.
+
+**Traded off:** The spec's stated expectation of 97+ mobile is unverified. It is likely comfortable given the page is a tiny static build with zero raster images and two small client components, but likely is not measured, and nothing in the pack claims otherwise.
+
+**Trigger that would change this:** if the score is ever wanted for the portfolio, run <https://pagespeed.web.dev/> against the production URL. No code change is needed, and nothing depends on it.
+
+**Status:** settled, deliberately not built
