@@ -28,8 +28,8 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
 });
 
-// Human gate: Isaac sets the real Measurement ID. Leave this placeholder.
-const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+// Set by Isaac on 2026-08-07. Human gate cleared (D-15).
+const GA_MEASUREMENT_ID = "G-0QXCCQYR17";
 
 const title = "Tally. The trading journal that writes itself";
 const description =
