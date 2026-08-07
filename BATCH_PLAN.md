@@ -8,7 +8,9 @@ Status values: `not started`, `in progress`, `blocked: pending X`, `done`.
 
 ## B1. Build the page to spec
 
-**Status:** not started
+**Status:** done, 2026-08-07. Rung 3, all thirteen assertions pass against a production build. See `SESSION_LOG.md` session 1.
+
+Two deviations from this plan's file list, both flagged in `SESSION_LOG.md`: `tailwind.config.ts` was not created (Tailwind v4 uses a CSS first config, tokens live in `app/globals.css`), and `components/Entrance.tsx` was added as the motion wrapper for B1-06.
 
 **Depends on:** nothing
 
