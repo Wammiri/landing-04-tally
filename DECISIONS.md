@@ -180,7 +180,9 @@ Every significant decision, including the ones where nothing gets built. Status 
 
 **Why:** Human gate. Only Isaac can create the GA4 property and its data streams.
 
-**Status:** settled, blocked pending Isaac
+**Resolved 2026-08-07 during B2.** Isaac supplied `G-0QXCCQYR17`, which is now set in `app/layout.tsx`. A GA4 Measurement ID is a public client side identifier, not a secret: it ships in the served HTML by design, so committing it is correct and it is not a secret scan finding. The Meta Pixel block stays commented, still pending a real Pixel ID.
+
+**Status:** resolved for GA4, Meta Pixel still blocked pending Isaac
 
 ---
 

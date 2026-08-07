@@ -5,6 +5,7 @@ All notable changes to Tally. Format based on Keep a Changelog. This project doe
 ## [Unreleased]
 
 ### Added
+
 - Building pack: `CLAUDE.md`, `DISCOVERY.md`, `DECISIONS.md`, `BATCH_PLAN.md`, `SESSION_LOG.md`, `CHANGELOG.md`.
 - `SPEC.md`, renamed from `04-tally.md`.
 
@@ -18,6 +19,10 @@ All notable changes to Tally. Format based on Keep a Changelog. This project doe
   - GA4 with the `G-XXXXXXXXXX` placeholder, `cta_click` and `waitlist_signup` events, Meta Pixel left commented.
   - Vector `t.` favicon. No raster images anywhere.
   - `tests/tally.spec.ts`, the thirteen assertion Playwright behavioral check.
+
+### Changed
+
+- Batch B2. The GA4 Measurement ID is now the real `G-0QXCCQYR17`, replacing the `G-XXXXXXXXXX` placeholder. Deployed to <https://landing-04-tally.vercel.app/>.
 
 ### Notes
 

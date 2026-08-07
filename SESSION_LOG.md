@@ -80,3 +80,44 @@ Appended after every session. Never deleted. Newest entry at the bottom.
 **Next:** B2, after the deploy. Confirm GA4 DebugView, then record the production URL and the real PageSpeed mobile score for handoff to project `05-isaac-site`.
 
 ---
+
+## 2026-08-07. Session 2: batch B2, post deploy handoff
+
+**Who:** Claude Code, batch B2 execution session.
+
+**Production URL:** <https://landing-04-tally.vercel.app/>
+
+Isaac deployed to Vercel and supplied the GA4 Measurement ID `G-0QXCCQYR17`, clearing two of the three human gates from B1.
+
+**What landed:**
+
+- `feat(analytics): B2-01 set real GA4 measurement id`. `G-XXXXXXXXXX` replaced with `G-0QXCCQYR17` in `app/layout.tsx`. Pushed, and Vercel redeployed automatically. The live page was confirmed serving the real ID before verification ran.
+
+**Verification: rung 4, live end to end against the deployed page and the real GA4 property.**
+
+- **The thirteen B1 assertions were re-run against the live production URL, not a local build. All thirteen pass.** Assertion 2 (server rendered `story` with the green glyph) and assertion 5 (zero layout shift, H1 656px and slot 239.16px identical across five samples) both hold in production.
+- Screenshots of the live URL at 1440px and 390px match the local build exactly.
+- **B2-01, GA4 confirmed firing on the live URL.** `window.gtag` loads, requests carry tag `G-0QXCCQYR17`, and `page_view` was observed reaching Google's `/g/collect` endpoint. `cta_click` and `waitlist_signup` were both observed in `window.dataLayer` and dispatched through `gtag` after a real form submission on the live page. GA4 batches conversion events slightly after dispatch, so the collect hits captured in the window were `page_view`, `scroll`, and `form_start`; the dispatch of both conversion events is confirmed, which is the part the code is responsible for.
+
+**Blocked, and not guessed:**
+
+- **B2-02 is incomplete. The PageSpeed mobile score is not recorded.** The public PageSpeed Insights API returned HTTP 429 (rate limited, no API key) on five consecutive attempts with 60 second backoff. `BATCH_PLAN.md` B2-02 says explicitly: do not guess it, measure it. No number has therefore been written to the pack. This is an external dependency blocker, not a code issue. Isaac runs the URL through <https://pagespeed.web.dev/> and supplies the mobile figure, or provides a PageSpeed API key.
+
+**Flags for Isaac:**
+
+1. **PageSpeed mobile score still needed** for B2-02 and for `[TODO_SCORE_4]` in project `05-isaac-site`. The spec expects 97+. Deliberately left unmeasured rather than estimated.
+2. **Meta Pixel block is still commented**, pending a real Pixel ID. Unchanged from B1, still a human gate under D-15. Not required by the spec, which only names GA4 events.
+3. **The GA4 Measurement ID is committed to the repository, and that is correct.** It is a public client side identifier that ships in the served HTML by design. It is not a secret and not a secret scan finding. Recorded in D-15.
+
+**Handoff for project `05-isaac-site` (B2-03):**
+
+- `[TODO_URL_4]` = `https://landing-04-tally.vercel.app/`
+- `[TODO_SCORE_4]` = pending, see B2-02 above.
+
+**House style:** the em dash scan returns zero results.
+
+**Parked:** B2-02 and therefore the score half of B2-03, pending the PageSpeed measurement.
+
+**Next:** nothing further in this project once the score lands. The page is complete, verified in production, and matches the spec.
+
+---
