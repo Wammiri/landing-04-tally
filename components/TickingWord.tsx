@@ -44,18 +44,35 @@ export default function TickingWord() {
       </span>{" "}
       {/*
         Fixed width reserved to "pattern", the longest word in the set, so the
-        line never reflows as words swap. D-10. The em based width tracks the
-        clamp() display size across viewports.
+        line never reflows as words swap (D-10). The width comes from an
+        invisible strut rendering "pattern" in the same font at the same size,
+        rather than a guessed em value, so the reservation stays exact at every
+        step of the clamp() display size. The animated words are laid over the
+        strut in the same grid cell.
       */}
       <span
         data-testid="ticker-slot"
-        className="relative inline-block w-[4.55em] align-baseline"
+        className="relative grid align-baseline [grid-template-areas:'w'] justify-items-start"
+        style={{ display: "inline-grid" }}
       >
+        {/*
+          The strut renders the longest word invisibly so the grid cell is
+          exactly as wide as the widest state and the line below never
+          reflows (D-10). The visible word and the period are laid over it in
+          the same cell, so the period stays tight against the word instead of
+          being pushed out to the reserved width.
+        */}
+        <span
+          aria-hidden="true"
+          className="invisible [grid-area:w] whitespace-nowrap"
+        >
+          pattern.
+        </span>
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={current.word}
             data-testid="ticker-word"
-            className="inline-block whitespace-nowrap"
+            className="[grid-area:w] whitespace-nowrap"
             initial={reduceMotion ? false : { y: 8, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={reduceMotion ? { opacity: 1 } : { y: -8, opacity: 0 }}
@@ -66,11 +83,10 @@ export default function TickingWord() {
             }
           >
             {current.word}
+            <span aria-hidden="true">.</span>
           </motion.span>
         </AnimatePresence>
       </span>
-      {/* D-09: the period sits outside the animated span so it never moves. */}
-      <span aria-hidden="true">.</span>
     </>
   );
 }

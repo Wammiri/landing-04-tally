@@ -39,6 +39,17 @@ body {
   font-variation-settings: "opsz" 120;
 }
 
+/* The entrance is disabled under reduced motion. This has to be CSS, not just
+   the useReducedMotion branch in Entrance.tsx: that hook returns null on the
+   server and on the first client render, so the hidden initial style would
+   paint before hydration corrects it. SPEC.md section 5. */
+@media (prefers-reduced-motion: reduce) {
+  .entrance {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Focus ring in ink, per spec section 7. */
 :focus-visible {
   outline: 2px solid #14171c;

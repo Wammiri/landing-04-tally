@@ -110,7 +110,9 @@ Every significant decision, including the ones where nothing gets built. Status 
 
 **Confidence:** high. **Cost if wrong:** near zero.
 
-**Status:** inferred, high confidence
+**Revised 2026-08-07 during B1.** Reversed after seeing it render. With the period outside the span, the fixed width reservation (D-10) pushed it away from the word: at 1440px the H1 read `story      .` with a visible gap, because the slot is always sized to `pattern` even while showing a shorter word. The period now sits inside the animated span, and the width reservation is carried by an invisible strut rendering `pattern.` in the same grid cell. The line still never reflows, and the period stays tight against the word. The original concern (the period jumping as widths change) does not occur, because the word and period move together as one unit.
+
+**Status:** revised, implemented
 
 ---
 

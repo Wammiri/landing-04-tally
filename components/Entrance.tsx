@@ -23,9 +23,13 @@ export default function Entrance({
     return <div className={className}>{children}</div>;
   }
 
+  // The `entrance` class is neutralized by a prefers-reduced-motion media
+  // query in globals.css. useReducedMotion returns null on the server and on
+  // the first client render, so without that CSS the hidden initial style
+  // (opacity 0, translateY 14px) would paint before hydration corrects it.
   return (
     <motion.div
-      className={className}
+      className={`entrance ${className ?? ""}`}
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
